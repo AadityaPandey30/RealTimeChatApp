@@ -34,7 +34,7 @@ const ChatBox: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col max-w-lg mx-auto h-[90vh] mt-16 p-5 bg-gray-800 shadow-lg rounded-xl">
+    <div className="flex flex-col max-w-lg mx-auto h-[90vh] mt-10 p-5 bg-yellow-700 shadow-lg rounded-xl max-h-[600px]">
       <div className="flex justify-between pb-2">
         <h1>Real-Time Chat App</h1>
         <WebSocketStatus isConnected={isConnected} />
@@ -51,11 +51,11 @@ const ChatBox: React.FC = () => {
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Type a message..."
-          className="flex-grow text-gray-600 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className=" text-gray-600 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full"
         />
         <button
           onClick={sendMessage}
-          className="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-blue-600 transition-all"
+          className="bg-yellow-400 text-black font-medium px-5 py-2 rounded-full hover:bg-yellow-500 transition-all"
         >
           Send
         </button>

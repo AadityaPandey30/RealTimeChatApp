@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import WebSocketStatus from "./WebSocketStatus";
 import MessageList from "./MessageList";
+import { env } from "process";
 
 const ChatBox: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -11,9 +12,11 @@ const ChatBox: React.FC = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [socket, setSocket] = useState<WebSocket | null>(null);
 
-  useEffect(() => {
-    const ws = new WebSocket("ws://localhost:4000/ws");
+  const WS_URL = process.env.NEXT_PUBLIC_WEBSOCKET_URL || "ws://localhost:4000/ws";
 
+  useEffect(() => {
+    const ws = new WebSocket(WS_URL);
+    
     ws.onopen = () => setIsConnected(true);
     ws.onclose = () => setIsConnected(false);
     ws.onmessage = (event) => {

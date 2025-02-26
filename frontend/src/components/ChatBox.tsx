@@ -35,8 +35,8 @@ const ChatBox: React.FC = () => {
 
   return (
     <div className="flex flex-col max-w-lg mx-auto h-[90vh] mt-10 p-5 bg-yellow-700 shadow-lg rounded-xl max-h-[600px]">
-      <div className="flex justify-between pb-2">
-        <h1>Real-Time Chat App</h1>
+      <div className="flex justify-between pb-2 items-end">
+        <h1 className="font-bold text-lg md:text-2xl text-black font-sans">Real-Time Chat App</h1>
         <WebSocketStatus isConnected={isConnected} />
       </div>
 

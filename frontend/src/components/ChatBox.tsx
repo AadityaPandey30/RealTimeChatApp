@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import WebSocketStatus from "./WebSocketStatus";
 import MessageList from "./MessageList";

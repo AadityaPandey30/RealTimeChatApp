@@ -20,10 +20,10 @@ const MessageList: React.FC<MessageListProps> = ({ messages, sentMessages }) => 
         return (
           <div
             key={index}
-            className={`p-3 rounded-lg max-w-xs text-white ${
+            className={`p-3 rounded-lg max-w-xs ${
               isSender
-                ? "bg-yellow-200 text-black self-end text-right rounded-br-none"
-                : "bg-gray-700 self-start text-left rounded-bl-none"
+                ? "bg-yellow-600 text-black self-end text-right rounded-br-none"
+                : "bg-gray-700 text-white self-start text-left rounded-bl-none"
             }`}
           >
             {isSender ? `You: ${msg}` : msg}

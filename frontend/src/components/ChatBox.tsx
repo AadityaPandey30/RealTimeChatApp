@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import WebSocketStatus from "./WebSocketStatus";
 import MessageList from "./MessageList";
 
-const WEBSOCKET_URL = "ws://localhost:8000/ws";  // Change if backend is hosted
+const WEBSOCKET_URL = "ws://localhost:4000/ws";  // Change if backend is hosted
 
 const ChatBox = () => {
   const [message, setMessage] = useState<string>("");

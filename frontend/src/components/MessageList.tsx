@@ -22,7 +22,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, sentMessages }) => 
             key={index}
             className={`p-3 rounded-lg max-w-xs text-white ${
               isSender
-                ? "bg-blue-500 self-end text-right rounded-br-none"
+                ? "bg-yellow-200 text-black self-end text-right rounded-br-none"
                 : "bg-gray-700 self-start text-left rounded-bl-none"
             }`}
           >

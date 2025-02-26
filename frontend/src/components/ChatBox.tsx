@@ -12,11 +12,11 @@ const ChatBox: React.FC = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [socket, setSocket] = useState<WebSocket | null>(null);
 
-  const WS_URL = process.env.NEXT_PUBLIC_WEBSOCKET_URL || "ws://localhost:4000/ws";
+  const WS_URL = process.env.NEXT_PUBLIC_WEBSOCKET_URL || "wss://realtimechatapp-ryr9.onrender.com/ws";
 
   useEffect(() => {
     const ws = new WebSocket(WS_URL);
-    
+
     ws.onopen = () => setIsConnected(true);
     ws.onclose = () => setIsConnected(false);
     ws.onmessage = (event) => {

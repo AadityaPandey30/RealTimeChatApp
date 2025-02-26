@@ -4,7 +4,9 @@ import Chat from "@/components/ChatBox";
 export default function Home() {
   return (
     <>
+    <div className="p-3">
     <Chat />
+    </div>
     </>
   );
 }

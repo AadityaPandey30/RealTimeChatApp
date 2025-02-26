@@ -1,50 +1,63 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import WebSocketStatus from "./WebSocketStatus";
 import MessageList from "./MessageList";
 
-const WEBSOCKET_URL = "ws://localhost:4000/ws";  // Change if backend is hosted
-
-const ChatBox = () => {
-  const [message, setMessage] = useState<string>("");
+const ChatBox: React.FC = () => {
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
-  const [ws, setWs] = useState<WebSocket | null>(null);
-  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    const socket = new WebSocket(WEBSOCKET_URL);
-    
-    socket.onopen = () => setIsConnected(true);
-    socket.onclose = () => setIsConnected(false);
-    socket.onmessage = (event) => {
-      setMessages((prev) => [...prev, event.data]);  // Add new message
+    const ws = new WebSocket("ws://localhost:4000/ws");
+
+    ws.onopen = () => setIsConnected(true);
+    ws.onclose = () => setIsConnected(false);
+    ws.onmessage = (event) => {
+      setMessages((prev) => [...prev, event.data]); // ✅ Update message list for ALL users
     };
 
-    setWs(socket);
-
-    return () => socket.close();  // Cleanup on unmount
+    setSocket(ws);
+    
+    return () => ws.close();
   }, []);
 
   const sendMessage = () => {
-    if (ws && message.trim() !== "") {
-      ws.send(message);
-      setMessage("");  // Clear input after sending
-    }
+    if (!message.trim() || !socket) return;
+
+    socket.send(message); // ✅ Send message through WebSocket
+    setMessage("");
   };
 
   return (
-    <div className="chat-container">
-      <WebSocketStatus isConnected={isConnected} />
-      <MessageList messages={messages} />
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type a message..."
-        className="message-input"
-      />
-      <button onClick={sendMessage} className="send-button">Send</button>
+    <div className="flex flex-col max-w-lg mx-auto h-[90vh] mt-16 p-5 bg-gray-800 shadow-lg rounded-xl">
+      <div className="flex justify-between pb-2">
+        <h1 className="text-white">Real-Time Chat App</h1>
+        <WebSocketStatus isConnected={isConnected} />
+      </div>
+
+      <div className="flex-grow overflow-y-auto p-3 bg-white text-gray-600 rounded-md shadow-inner h-96">
+        <MessageList messages={messages} />
+      </div>
+
+      <div className="flex items-center gap-2 mt-4">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          placeholder="Type a message..."
+          className="flex-grow text-gray-600 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          onClick={sendMessage}
+          className="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-blue-600 transition-all"
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
 };

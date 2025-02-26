@@ -4,7 +4,6 @@ import Chat from "@/components/ChatBox";
 export default function Home() {
   return (
     <>
-     <h1>Real-Time Chat App</h1>
     <Chat />
     </>
   );

@@ -7,11 +7,11 @@ A **real-time chat application** built with **FastAPI (backend)** and **Next.js 
 ## 📂 Project Structure
 
 /RealTimeChatApp
-│── /backend # FastAPI backend 
-│── /frontend # Next.js frontend 
-│── .gitignore # Git ignore file 
-│── .env.example # Sample environment variables 
-│── README.md # Project documentation
+- │── /backend # FastAPI backend
+- │── /frontend # Next.js frontend
+- │── .gitignore # Git ignore file 
+- │── .env.example # Sample environment variables 
+- │── README.md # Project documentation
 
 ---
 
